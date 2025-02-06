@@ -1,16 +1,19 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
   return (
-    <header>
-      <div className="container">
-        <Link to="/">
-          <h1>Workout Buddy</h1>
-        </Link>
-      </div>
-    </header>
-  )
-}
+    <nav style={{ display: "flex", justifyContent: "space-between", padding: "10px", background: "#eee" }}>
+      <Link to="/">Home</Link>
+      <button onClick={handleLogout}>Logout</button>
+    </nav>
+  );
+};
 
-export default Navbar
+export default Navbar;

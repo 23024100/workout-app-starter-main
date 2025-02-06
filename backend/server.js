@@ -8,6 +8,9 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 app.use(express.json());
+const authRoutes = require("./routes/auth"); // Import auth routes
+app.use("/api/auth", authRoutes); // Use authentication routes
+
 
 app.use((req, res, next) => {
   console.log(req.path, req.method);
