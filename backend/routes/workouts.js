@@ -1,28 +1,11 @@
-const express = require('express')
-const {
-  createWorkout,
-  getWorkouts,
-  getWorkout,
-  deleteWorkout,
-  updateWorkout
-} = require('../controllers/workoutController')
+const express = require("express");
+const authMiddleware = require("../middleware/authMiddleware"); // Import middleware
 
-const router = express.Router()
+const router = express.Router();
 
-// GET all workouts
-router.get('/', getWorkouts)
+// Example of a PROTECTED route
+router.get("/", authMiddleware, (req, res) => {
+  res.json({ message: "Protected workout data!" });
+});
 
-//GET a single workout
-router.get('/:id', getWorkout)
-
-// POST a new workout
-router.post('/', createWorkout)
-
-// DELETE a workout
-router.delete('/:id', deleteWorkout)
-
-// UPDATE a workout
-router.patch('/:id', updateWorkout)
-
-
-module.exports = router
+module.exports = router;
